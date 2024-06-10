@@ -17,6 +17,7 @@ pipeline {
                         sh 'rm -rf tg-reminber-bot/.git*'
                     } else {
                         echo 'not unix'
+                        bat 'powershell $PSVersionTable'
                         bat 'powershell -Command "Get-ChildItem -Path .\\* -Recurse | Remove-Item -Force -Recurse"'
                         echo 'removed files'
                         bat 'git clone  https://github.com/MaxGoryunov/tg-reminber-bot.git'
