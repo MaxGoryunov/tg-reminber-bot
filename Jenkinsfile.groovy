@@ -12,13 +12,13 @@ pipeline {
                 echo '===============downloading git repo==================='
                 script {
                     if (isUnix()) {
-                        sh 'rm -rf Reminder_Bot'
-                        sh 'git clone --depth=1 https://github.com/UUyy-Geniy/Reminder_Bot.git'
-                        sh 'rm -rf Reminder_Bot/.git*'
+                        sh 'rm -rf reminder_bot'
+                        sh 'git clone --depth=1 https://github.com/MaxGoryunov/tg-reminber-bot.git'
+                        sh 'rm -rf reminder_bot/.git*'
                     } else {
                         bat 'powershell -Command "Get-ChildItem -Path .\\* -Recurse | Remove-Item -Force -Recurse"'
-                        bat 'git clone --depth=1 https://github.com/UUyy-Geniy/Reminder_Bot.git'
-                        bat 'powershell Remove-Item Reminder_Bot/.git* -Recurse -Force'
+                        bat 'git clone --depth=1 https://github.com/MaxGoryunov/tg-reminber-bot.git'
+                        bat 'powershell Remove-Item reminder_bot/.git* -Recurse -Force'
                     }
                 }
                 echo '===============git repo downloaded==================='
@@ -30,13 +30,13 @@ pipeline {
                 withCredentials([file(credentialsId: 'ENV', variable: 'ENV'), file(credentialsId: 'CREDS', variable: 'CREDS'), file(credentialsId: 'TOKEN', variable: 'TOKEN')]) {
                     script {
                         if (isUnix()) {
-                            sh 'cp $ENV ./Reminder_Bot/.env'
-                            sh 'cp $REDS ./Reminder_Bot/credentials_4.json'
-                            sh 'cp $TOKEN ./Reminder_Bot/token_4.json'
+                            sh 'cp $ENV ./reminder_bot/.env'
+                            sh 'cp $REDS ./reminder_bot/credentials.json'
+                            sh 'cp $TOKEN ./reminder_bot/token.json'
                         } else {
-                            bat 'powershell Copy-Item %ENV% -Destination ./Reminder_Bot/.env'
-                            bat 'powershell Copy-Item %CREDS% -Destination ./Reminder_Bot/credentials_4.json'
-                            bat 'powershell Copy-Item %TOKEN% -Destination ./Reminder_Bot/token_4.json'
+                            bat 'powershell Copy-Item %ENV% -Destination ./reminder_bot/.env'
+                            bat 'powershell Copy-Item %CREDS% -Destination ./reminder_bot/credentials.json'
+                            bat 'powershell Copy-Item %TOKEN% -Destination ./reminder_bot/token.json'
                         }
                     }
                 }
@@ -49,9 +49,9 @@ pipeline {
             echo '===============run docker==================='
                 script {
                     if (isUnix()) {
-                        sh 'cd Reminder_Bot && docker-compose up -d --build'
+                        sh 'cd reminder_bot && docker-compose up -d --build'
                     } else {
-                        bat 'cd Reminder_Bot && docker-compose up -d --build'
+                        bat 'cd reminder_bot && docker-compose up -d --build'
                     }
                 }
                 echo '===============docker container is running successfully==================='

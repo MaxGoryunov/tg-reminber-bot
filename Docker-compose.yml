@@ -10,7 +10,7 @@ services:
 #      - ./migrations:/RPI_Bot/migrations
     working_dir: /RPI_Bot
     command: >
-      sh -c "python bot.py"
+      sh -c "python main.py"
     environment:
       - TZ=Europe/Moscow
       - DB_URL=postgresql://dbuser:pass@database:5432/dbname
