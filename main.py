@@ -1,7 +1,6 @@
 import io
 from time import sleep
 import threading
-
 import uvicorn
 import telebot
 from telebot import types
