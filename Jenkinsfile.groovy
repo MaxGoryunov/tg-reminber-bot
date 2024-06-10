@@ -16,9 +16,13 @@ pipeline {
                         sh 'git clone --depth=1 https://github.com/MaxGoryunov/tg-reminber-bot.git'
                         sh 'rm -rf tg-reminber-bot/.git*'
                     } else {
+                        echo 'not unix'
                         bat 'powershell -Command "Get-ChildItem -Path .\\* -Recurse | Remove-Item -Force -Recurse"'
+                        echo 'removed files'
                         bat 'git clone  https://github.com/MaxGoryunov/tg-reminber-bot.git'
+                        echo 'cloned repo'
                         bat 'powershell Remove-Item tg-reminber-bot/.git* -Recurse -Force'
+                        echo 'removed .git file'
                     }
                 }
                 echo '===============git repo downloaded==================='
