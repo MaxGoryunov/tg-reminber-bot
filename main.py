@@ -49,20 +49,20 @@ def notification_loop():
     message = None
     
     while True:
-        sleep(30)
-        print("10 secs have passed")
-        if glob_chat['message'] is not None:
-            print("is not none")
-            message = glob_chat['message']
-            notifications = get_awaited_notifications(message)
-            for nftn in notifications:
-                if nftn.is_recurring and nftn.notification_datetime < datetime.datetime.now():
-                    show_completed_nftn(message, nftn)
-                    offset_recurring_notification_by_interval(nftn)
-                elif (not nftn.is_recurring) and nftn.notification_datetime < datetime.datetime.now():
-                    print("here")
-                    show_completed_nftn(message, nftn)
-                    mark_as_sent(nftn.id)
+        sleep(5)
+        print("5 secs have passed")
+        # if glob_chat['message'] is not None:
+        #     print("is not none")
+        #     message = glob_chat['message']
+        #     notifications = get_awaited_notifications(message)
+        #     for nftn in notifications:
+        #         if nftn.is_recurring and nftn.notification_datetime < datetime.datetime.now():
+        #             show_completed_nftn(message, nftn)
+        #             offset_recurring_notification_by_interval(nftn)
+        #         elif (not nftn.is_recurring) and nftn.notification_datetime < datetime.datetime.now():
+        #             print("here")
+        #             show_completed_nftn(message, nftn)
+        #             mark_as_sent(nftn.id)
 
 
 @bot.message_handler(commands=['start'])
