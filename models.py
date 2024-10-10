@@ -7,7 +7,8 @@ load_dotenv()
 
 Base = declarative_base()
 
-db_uri = os.getenv('db_url')
+# db_uri = os.getenv('db_url')
+db_uri = "postgresql://postgres:28Jun2003@host.docker.internal:5432/RpiLab"
 engine = create_engine(db_uri, pool_size=10, max_overflow=20)
 
 class Notification(Base):
