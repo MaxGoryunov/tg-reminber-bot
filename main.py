@@ -3,6 +3,7 @@ from time import sleep
 import threading
 import uvicorn
 import telebot
+from bot import bot
 from telebot import types
 from telebot.types import ReplyKeyboardRemove, CallbackQuery
 from telebot_calendar import Calendar, CallbackData, ENGLISH_LANGUAGE
@@ -17,8 +18,6 @@ from utils import store_notification, store_db_entry, get_awaited_notifications,
     change_one_time_datetime, update_one_time_files_on_disk, offset_recurring_notification_by_interval, \
     offset_disk_folder, get_sent_notifications, sent_notifications_options, mark_as_awaited, print_sent_notifications
 
-token = config.BOT_TOKEN
-bot = telebot.TeleBot(token)
 glob_chat = {
     'message': None
 }
@@ -47,7 +46,7 @@ def show_completed_nftn(message, nftn: Notification):
 def notification_loop():
     prev = start
     message = None
-    
+    print("inside loop")
     while True:
         sleep(5)
         print("5 secs have passed")
@@ -429,6 +428,7 @@ def attach_files_loop(message, date, hour, minute, title, docs):
 # notification_loop()
 
 if __name__ == '__main__':
+    print("threading")
     threading.Thread(
         target=bot.infinity_polling,
         name="bot infinity polling",
@@ -440,4 +440,4 @@ if __name__ == '__main__':
         daemon=True
     ).start()
 
-    # uvicorn.run('server:app', host='0.0.0.0', port=3000, reload=True)
+    uvicorn.run('server:app', host='0.0.0.0', port=3030, reload=True)
