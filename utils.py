@@ -145,25 +145,6 @@ def store_notification(bot, message, date, hour, minute,  docs):
     try:
         service = build("drive", "v3", credentials=creds)
 
-        # Создание папки
-        # file_metadata = {
-        #     'name': FOLDER_NAME,
-        #     'mimeType': 'application/vnd.google-apps.folder'
-        # }
-        # folder = service.files().create(body=file_metadata, fields='id').execute()
-        # folder_id = folder.get('id')
-        #
-        # # Загрузка файла в папку
-        # media = MediaFileUpload(FILE_PATH, mimetype='text/plain')
-        # file_metadata = {
-        #     'name': 'file.txt',
-        #     'parents': [folder_id]
-        # }
-        # file = service.files().create(body=file_metadata, media_body=media,
-        #                               fields='id').execute()
-        # print(f'File ID: {file.get("id")} was uploaded to folder {FOLDER_NAME}')
-        # print("hello-------")
-        # Call the Drive v3 API
         print(f"chat id = {message.chat.id}")
         dt = form_datetime(date, hour, minute)
         # results = service.files().list(
