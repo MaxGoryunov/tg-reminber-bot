@@ -12,6 +12,7 @@ pipeline {
            stage('Build and Run Docker Container') {
                steps {
                    script {
+                       sh 'cd ~'
                        sh '/var/run/docker build -t rpi-app .'
                        sh '/var/run/docker run --network="host" -d --name rpi-run-app rpi-app'
                    }
