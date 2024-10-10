@@ -6,6 +6,6 @@ COPY . /app
 RUN apt-get update && apt-get install -y gcc
 RUN pip install --no-cache-dir -r requirements.txt
 
-EXPOSE 3000
+EXPOSE 3030
 
 CMD ["python", "./main.py"]
