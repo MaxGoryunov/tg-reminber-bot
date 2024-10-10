@@ -47,6 +47,7 @@ def show_completed_nftn(message, nftn: Notification):
 def notification_loop():
     prev = start
     message = None
+    
     while True:
         sleep(30)
         print("10 secs have passed")
