@@ -132,7 +132,7 @@ def create_db_dump():
 
 
 def archive_files(local_folder):
-    timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     archive_name = f"archive_{timestamp}.zip"
     with zipfile.ZipFile(archive_name, 'w') as zipf:
         for root, dirs, files in os.walk(local_folder):

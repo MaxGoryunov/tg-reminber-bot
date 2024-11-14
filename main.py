@@ -17,6 +17,8 @@ from utils import store_notification, store_db_entry, get_awaited_notifications,
     change_interval, make_one_time, make_recurring, mark_as_sent, update_files_on_disk, change_one_time_title, \
     change_one_time_datetime, update_one_time_files_on_disk, offset_recurring_notification_by_interval, \
     offset_disk_folder, get_sent_notifications, sent_notifications_options, mark_as_awaited, print_sent_notifications
+from logger import log_action
+
 
 glob_chat = {
     'message': None
@@ -49,7 +51,7 @@ def notification_loop():
     print("inside loop")
     while True:
         sleep(5)
-        print("5 secs have passed")
+        # print("5 secs have passed")
         # if glob_chat['message'] is not None:
         #     print("is not none")
         #     message = glob_chat['message']
@@ -67,6 +69,7 @@ def notification_loop():
 @bot.message_handler(commands=['start'])
 def start_message(message):
     glob_chat['message'] = message
+    log_action(message, "start bot")
     bot.send_message(
         message.chat.id,
         "Hi! This bot can help you with reminding about different events and"
@@ -109,6 +112,7 @@ def view_awaited_notifications(message):
 
 
 def message_reply(message):
+    log_action(message, f'user selected "{message.text}"')
     print("inside message reply message ", message.text)
     if message.text == "Create a notification":
         print("Chosen create a notification")
@@ -142,6 +146,8 @@ def view_sent_notifications(message):
 
 
 def sent_ntfns_reply(message):
+    log_action(message,
+            f"from sent notifications user selected {message.text}")
     if message.text == "Go back to the menu":
         menu_options(message)
     elif message.text == "Mark as awaited":
@@ -155,6 +161,8 @@ def sent_ntfns_reply(message):
 
 
 def awaited_nots_reply(message):
+    log_action(message,
+            f"from awaited notifications user selected {message.text}")
     print("Awaited_nots text = ", message.text)
     if message.text == "Go back to the menu":
         menu_options(message)
@@ -440,4 +448,4 @@ if __name__ == '__main__':
         daemon=True
     ).start()
 
-    uvicorn.run('server:app', host='0.0.0.0', port=3030, reload=True)
+    uvicorn.run('server:app', host='0.0.0.0', port=3040, reload=True)
