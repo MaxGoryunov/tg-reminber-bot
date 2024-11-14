@@ -81,7 +81,7 @@ def start_message(message):
 def menu_options(message):
     print("glob chat id = ", glob_chat['message'].chat.id)
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    create = types.KeyboardButton("Create a notification")
+    create = types.KeyboardButton("Create a new notification")
     awaited = types.KeyboardButton("View awaited notifications")
     view = types.KeyboardButton("View sent notifications")
     markup.add(create, awaited, view)

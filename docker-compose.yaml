@@ -2,18 +2,18 @@ networks:
   loki:
 
 services:
-  api:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - 3040:3040
-    restart: always
-    volumes:
-      - .:/app
-      - ./logs:/app/logs
-    networks:
-      - loki
+  # api:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 3040:3040
+  #   restart: always
+  #   volumes:
+  #     - .:/app
+  #     - ./logs:/app/logs
+  #   networks:
+  #     - loki
 
   loki:
     image: grafana/loki:2.7.1
